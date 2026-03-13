@@ -5,7 +5,7 @@ import { FaCamera } from "react-icons/fa";
 
 
 const Login = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   const [avatar, setAvatar] = useState(null);
   const [fullName, setFullName] = useState('');
@@ -74,7 +74,7 @@ const Login = () => {
               </button>
             </form>
 
-            <p className="mt-2 text-center text-gray-600 flex justify-center items-center gap-1 text-xs">
+            <div className="mt-2 text-center text-gray-600 flex justify-center items-center gap-1 text-xs">
               Don't have an account?{' '}
               <div
                 onClick={() => setIsLogin(false)}
@@ -82,7 +82,7 @@ const Login = () => {
               >
                 Sign up here
               </div>
-            </p>
+            </div>
           </div>
         ) : (
           <div className="max-h-[90vh] overflow-y-auto overflow-x-hidden">
@@ -190,7 +190,7 @@ const Login = () => {
               </button>
             </form>
 
-            <p className="mt-2 text-center text-gray-600 flex justify-center items-center gap-1 text-xs">
+            <div className="mt-2 text-center text-gray-600 flex justify-center items-center gap-1 text-xs">
               Already have an account?{' '}
               <div
                 onClick={() => setIsLogin(true)}
@@ -198,7 +198,7 @@ const Login = () => {
               >
                 Sign in here
               </div>
-            </p>
+            </div>
           </div>
         )}
       </div>
