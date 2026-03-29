@@ -1,33 +1,135 @@
 import React from 'react';
+import { useOutletContext, useParams } from 'react-router';
+import {
+  HiOutlineEllipsisVertical,
+  HiOutlineMagnifyingGlass,
+  HiOutlinePhone,
+  HiOutlineVideoCamera,
+} from 'react-icons/hi2';
+
+const messages = [
+  {
+    id: 1,
+    type: 'incoming',
+    text: 'Hey, I pushed the latest design ideas. Let me know what feels strongest.',
+    time: '09:10 AM',
+  },
+  {
+    id: 2,
+    type: 'outgoing',
+    text: 'Saw them. The spacing and card rhythm look much better now.',
+    time: '09:14 AM',
+  },
+  {
+    id: 3,
+    type: 'incoming',
+    text: 'Perfect. I can also prepare a mobile-first version if you want one more pass.',
+    time: '09:16 AM',
+  },
+  {
+    id: 4,
+    type: 'outgoing',
+    text: 'Yes, please. Keep the sidebar behavior simple on smaller screens.',
+    time: '09:18 AM',
+  },
+];
 
 const Chat = () => {
-  return (
-    <section className="space-y-4 sm:space-y-6">
-      <div className="rounded-[24px] border border-white/10 bg-white/5 p-5 sm:p-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200/80">Chat</p>
-        <h2 className="mt-3 text-xl font-semibold text-white sm:text-2xl">Conversation View</h2>
-        <p className="mt-3 text-xs leading-6 text-slate-300 sm:text-sm">
-          This area is ready for your message list and composer. The layout keeps content readable
-          on mobile first, then expands into a wider workspace on larger screens.
-        </p>
-      </div>
+  const { chatId } = useParams();
+  const { selectedChat, openProfile, isProfileOpen, toggleProfile } = useOutletContext();
 
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]">
-        <div className="rounded-[24px] border border-white/10 bg-slate-900/55 p-5">
-          <h3 className="text-base font-semibold text-white">Messages</h3>
-          <div className="mt-4 space-y-3 text-xs text-slate-300 sm:text-sm">
-            <div className="rounded-2xl bg-white/8 px-4 py-3">Responsive message list placeholder</div>
-            <div className="rounded-2xl bg-white/5 px-4 py-3">Incoming and outgoing bubbles can go here</div>
-            <div className="rounded-2xl bg-white/5 px-4 py-3">Composer can stay fixed at the bottom later</div>
+  if (!selectedChat || selectedChat.id !== chatId) {
+    return (
+      <section className="thin-scrollbar flex h-full min-h-0 items-center justify-center overflow-y-auto rounded-[22px] border border-dashed border-white/10 bg-white/[0.03] p-5 text-center">
+        <div>
+          <h2 className="text-lg font-semibold text-white">Conversation not found</h2>
+          <p className="mt-2 text-xs text-slate-300 sm:text-sm">
+            Select a valid chat from the sidebar to start messaging.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="flex h-full min-h-0 flex-col gap-2.5">
+      <header className="flex flex-col gap-2.5 rounded-[20px] border border-white/10 bg-white/[0.06] p-2.5 shadow-xl shadow-slate-950/20 sm:flex-row sm:items-center sm:justify-between sm:p-3">
+        <button
+          type="button"
+          onClick={openProfile}
+          className="flex items-center gap-2.5 rounded-2xl text-left transition-all duration-200 hover:bg-white/[0.04] sm:p-1"
+        >
+          <div className="flex h-11 w-11 items-center justify-center rounded-[16px] bg-gradient-to-br from-cyan-300 via-sky-400 to-blue-500 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-950/15 sm:h-12 sm:w-12">
+            {selectedChat.avatar}
           </div>
+          <div>
+            <p className="text-sm font-semibold text-white sm:text-base">{selectedChat.name}</p>
+            <p className="text-[11px] text-cyan-100 sm:text-xs">
+              {selectedChat.role} {isProfileOpen ? '• profile open' : '• tap to view details'}
+            </p>
+          </div>
+        </button>
+
+        <div className="flex items-center gap-2 self-end sm:self-auto">
+          {[HiOutlineMagnifyingGlass, HiOutlinePhone, HiOutlineVideoCamera].map((Icon, index) => (
+            <button
+              key={index}
+              type="button"
+              className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/[0.1] sm:h-10 sm:w-10"
+            >
+              <Icon />
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={toggleProfile}
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-cyan-300/25 bg-cyan-400/10 text-base text-cyan-100 transition-all duration-200 hover:-translate-y-0.5 hover:bg-cyan-400/20 sm:h-10 sm:w-10"
+          >
+            <HiOutlineEllipsisVertical />
+          </button>
+        </div>
+      </header>
+
+      <div className="flex min-h-0 flex-1 flex-col rounded-[20px] border border-white/10 bg-[linear-gradient(180deg,_rgba(15,23,42,0.72),_rgba(8,47,73,0.42))] p-2.5 shadow-2xl shadow-slate-950/20 sm:p-3">
+        <div className="thin-scrollbar min-h-0 flex-1 space-y-3 overflow-y-auto pr-1">
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className={`flex ${message.type === 'outgoing' ? 'justify-end' : 'justify-start'}`}
+            >
+              <div
+                className={`max-w-[88%] rounded-[18px] px-3 py-2.5 text-xs leading-5 shadow-lg sm:max-w-[72%] sm:text-sm ${
+                  message.type === 'outgoing'
+                    ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-cyan-950/20'
+                    : 'border border-white/10 bg-white/[0.07] text-slate-100 shadow-slate-950/10'
+                }`}
+              >
+                <p>{message.text}</p>
+                <span
+                  className={`mt-1.5 block text-[10px] ${
+                    message.type === 'outgoing' ? 'text-slate-900/70' : 'text-slate-400'
+                  }`}
+                >
+                  {message.time}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="rounded-[24px] border border-white/10 bg-slate-900/55 p-5">
-          <h3 className="text-base font-semibold text-white">Chat Details</h3>
-          <div className="mt-4 space-y-3 text-xs text-slate-300 sm:text-sm">
-            <div className="rounded-2xl bg-white/8 px-4 py-3">Members</div>
-            <div className="rounded-2xl bg-white/5 px-4 py-3">Shared files</div>
-            <div className="rounded-2xl bg-white/5 px-4 py-3">Mute and notification settings</div>
+        <div className="mt-2.5 rounded-[16px] border border-white/10 bg-white/[0.04] p-2.5">
+          <div className="flex flex-col gap-2.5 sm:flex-row sm:items-end">
+            <textarea
+              rows="2"
+              placeholder="Write a message..."
+              className="thin-scrollbar min-h-[64px] max-h-24 flex-1 resize-none overflow-y-auto rounded-2xl border border-white/10 bg-slate-950/60 px-3 py-2.5 text-xs text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/35 sm:text-sm"
+            />
+            <button
+              type="button"
+              className="rounded-2xl bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600 px-5 py-2.5 text-xs font-semibold text-white shadow-lg shadow-cyan-950/20 transition-all duration-200 hover:-translate-y-0.5 sm:text-sm"
+            >
+              Send
+            </button>
           </div>
         </div>
       </div>

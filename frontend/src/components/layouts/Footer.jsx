@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="mt-6 px-2 py-4 text-center text-sm text-slate-400">
+    <footer className="mt-1 px-2 py-1 text-center text-[10px] text-slate-500">
       Chat App workspace for home, chat, and group routes.
     </footer>
   );
