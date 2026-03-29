@@ -1,9 +1,10 @@
-# 💬 Full Stack Chat Application
+# 💬 Connectify – Full Stack Chat Application
 
 ## 📌 Description  
-A real-time full stack chat application that enables users to connect, communicate, and collaborate seamlessly. Users can register, search for other users, send and manage chat requests, and engage in both private and group conversations.  
+Connectify is a real-time full stack chat application that enables users to connect, communicate, and collaborate seamlessly. Users can register, search for other users, send and manage chat requests, and engage in both private and group conversations.  
 
-The application supports real-time messaging, file sharing, notifications, and role-based access control, including group administration and a system-level admin dashboard. It is designed to simulate modern messaging platforms with scalable architecture and smooth user experience.
+The application supports real-time messaging, file sharing, notifications, and role-based access control, including group administration and a system-level admin dashboard. Connectify is designed to simulate modern messaging platforms with scalable architecture and a smooth user experience.
+
 
 ---
 
