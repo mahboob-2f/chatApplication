@@ -14,11 +14,10 @@ The application supports real-time messaging, file sharing, notifications, and r
 - 📩 Send, accept, and reject chat requests  
 - 💬 Real-time private messaging  
 - 👥 Group chat (3+ members)  
-- 🛠️ Group management (add/remove users, rename, delete)  
+- 🛠️ Group management (add/remove users, rename, delete) done by Admin 
 - 🔄 Admin transfer when group admin leaves  
 - 📎 File and attachment sharing  
-- 🔔 Notifications for requests and activities  
-- 🗑️ Chat deletion and unfriend functionality  
+- 🔔 Notifications for requests and activities
 - 📊 Admin dashboard for managing users, groups, and messages  
 
 ---
@@ -28,7 +27,8 @@ The application supports real-time messaging, file sharing, notifications, and r
 ### 🎨 Frontend  
 - ⚛️ React.js  
 - 🎨 Tailwind CSS  
-- 🔗 Axios  
+- 🔗 Axios
+-    React Bits 
 
 ### ⚙️ Backend  
 - 🟢 Node.js  
