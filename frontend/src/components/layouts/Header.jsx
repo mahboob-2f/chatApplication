@@ -1,41 +1,31 @@
 import React, { useState } from 'react';
 import {
   HiOutlineBars3,
-  HiOutlineBell,
-  HiOutlinePlus,
-  HiOutlineUserCircle,
-  HiOutlineUserGroup,
   HiOutlineXMark,
 } from 'react-icons/hi2';
-import { IoSearchOutline } from 'react-icons/io5';
-import { RiMessage3Line } from 'react-icons/ri';
+import { actionButtons } from '../../constants/header';
+import { useNavigate } from 'react-router';
 
-const actionButtons = [
-  { label: 'Search', icon: IoSearchOutline },
-  { label: 'New', icon: HiOutlinePlus },
-  { label: 'Groups', icon: HiOutlineUserGroup },
-  { label: 'Notifications', icon: HiOutlineBell },
-  { label: 'Profile', icon: HiOutlineUserCircle },
-];
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <header className="rounded-[22px] border border-rose-200/30 bg-gradient-to-r from-rose-400 via-rose-400 to-rose-500 px-3 py-2.5 shadow-xl shadow-rose-950/25 sm:rounded-[24px] sm:px-4">
+    <header className="rounded-[22px] border border-rose-200/30 bg-linear-to-r from-rose-400 via-rose-400 to-rose-500 px-3 py-2.5 shadow-xl shadow-rose-950/25 sm:rounded-3xl sm:px-4">
       <div className="flex items-center justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-2.5">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-950/15 text-base text-white ring-1 ring-white/25 sm:h-11 sm:w-11">
-            <RiMessage3Line />
+        <div onClick={() => navigate('/')} className="flex min-w-0 items-center gap-2.5 cursor-pointer">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-950/15 text-base text-white ring-1 ring-white/25 sm:h-11 sm:w-11 ">
+            <img src="/logo.png" alt="Logo" />
           </div>
 
           <div className="min-w-0">
             <p className="truncate text-[9px] font-semibold uppercase tracking-[0.24em] text-rose-50/80 sm:text-[10px]">
               Chat Platform
             </p>
-            <h1 className="truncate text-sm font-semibold text-white sm:text-lg">ConnectHub</h1>
+            <h1 className="truncate text-sm font-semibold text-white sm:text-lg">Connectify</h1>
           </div>
         </div>
 

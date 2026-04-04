@@ -1,6 +1,5 @@
 import React from 'react';
-
-const groups = ['Design Team', 'Frontend Squad', 'Project Updates', 'Community Lounge'];
+import { groups } from '../constants/groups';
 
 const Groups = () => {
   return (

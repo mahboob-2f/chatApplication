@@ -5,6 +5,20 @@ body {
   overflow: hidden;
 }
 
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
+button:disabled,
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+input[type="reset"]:disabled {
+  cursor: not-allowed;
+}
+
 #root {
   height: 100dvh;
   overflow: hidden;
@@ -13,6 +27,12 @@ body {
 /* Global Responsive Design & Transitions */
 * {
   transition: all 0.3s ease-in-out;
+}
+
+.resize-panel,
+.resize-handle,
+.resize-handle * {
+  transition: none !important;
 }
 
 /* Responsive Typography */
