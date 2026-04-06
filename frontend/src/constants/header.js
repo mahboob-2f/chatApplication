@@ -7,9 +7,9 @@ import {
 import { IoSearchOutline } from 'react-icons/io5';
 
 export const actionButtons = [
-  { label: 'Search', icon: IoSearchOutline },
-  { label: 'New', icon: HiOutlinePlus },
-  { label: 'Groups', icon: HiOutlineUserGroup },
-  { label: 'Notifications', icon: HiOutlineBell },
-  { label: 'Profile', icon: HiOutlineUserCircle },
+  { id: 'search', label: 'Search', icon: IoSearchOutline },
+  { id: 'new', label: 'New', icon: HiOutlinePlus },
+  { id: 'groups', label: 'Groups', icon: HiOutlineUserGroup },
+  { id: 'notifications', label: 'Notifications', icon: HiOutlineBell },
+  { id: 'profile', label: 'Profile', icon: HiOutlineUserCircle },
 ];

@@ -1,0 +1,38 @@
+export const dummyNotifications = [
+  {
+    id: 'notif-1',
+    name: 'Rahul Verma',
+    username: '@rahulv',
+    initials: 'RV',
+    avatarClassName: 'bg-amber-100 text-amber-700',
+    message: 'sent you a friend request',
+    time: '2 min ago',
+  },
+  {
+    id: 'notif-2',
+    name: 'Sophia Lee',
+    username: '@sophialee',
+    initials: 'SL',
+    avatarClassName: 'bg-violet-100 text-violet-700',
+    message: 'wants to connect with you',
+    time: '10 min ago',
+  },
+  {
+    id: 'notif-3',
+    name: 'Karan Mehta',
+    username: '@karanm',
+    initials: 'KM',
+    avatarClassName: 'bg-cyan-100 text-cyan-700',
+    message: 'sent you a friend request',
+    time: '35 min ago',
+  },
+  {
+    id: 'notif-4',
+    name: 'Olivia Brown',
+    username: '@oliviab',
+    initials: 'OB',
+    avatarClassName: 'bg-pink-100 text-pink-700',
+    message: 'wants to add you',
+    time: '1 hour ago',
+  },
+];
