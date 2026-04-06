@@ -32,9 +32,9 @@ const NotificationsModal = ({ isOpen, onClose, notificationStates, onAction }) =
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 px-4 backdrop-blur-[4px]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 px-4 backdrop-blur-xs">
       <div
-        className="flex h-[560px] w-full max-w-lg flex-col rounded-[24px] border border-white/70 bg-white/95 p-4 shadow-[0_24px_80px_rgba(15,23,42,0.22)] sm:p-5"
+        className="flex h-140 w-full max-w-lg flex-col rounded-[24px] border border-white/70 bg-white/95 p-4 shadow-[0_24px_80px_rgba(15,23,42,0.22)] sm:p-5"
         role="dialog"
         aria-modal="true"
         aria-labelledby="notifications-title"
@@ -132,7 +132,7 @@ const NotificationsModal = ({ isOpen, onClose, notificationStates, onAction }) =
               </div>
             ))
           ) : (
-            <div className="flex h-full min-h-[220px] items-center justify-center rounded-[22px] border border-dashed border-slate-200 bg-slate-50 px-4 py-7 text-center">
+            <div className="flex h-full min-h-55 items-center justify-center rounded-[22px] border border-dashed border-slate-200 bg-slate-50 px-4 py-7 text-center">
               <div>
                 <p className="text-[15px] font-semibold text-slate-700">No notifications</p>
                 <p className="mt-1 text-sm text-slate-500">New friend requests will appear here.</p>

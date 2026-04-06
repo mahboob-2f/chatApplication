@@ -9,7 +9,7 @@ const Profile = ({ chat }) => {
   return (
     <section className="thin-scrollbar h-full min-h-0 overflow-y-auto pr-1">
       <div className="space-y-3.5 pb-1">
-      <div className="rounded-[22px] border border-white/10 bg-gradient-to-br from-cyan-400/20 via-sky-500/10 to-blue-500/15 p-4 text-center shadow-xl shadow-slate-950/20">
+      <div className="rounded-[22px] border border-white/10 bg-linear-to-br from-cyan-400/20 via-sky-500/10 to-blue-500/15 p-4 text-center shadow-xl shadow-slate-950/20">
         <ChatAvatar chat={chat} size="lg" className="mx-auto" />
         <h3 className="mt-3 text-base font-semibold text-white">{chat.name}</h3>
         <p className="mt-1 text-xs text-cyan-100 sm:text-sm">{chat.role}</p>
@@ -33,7 +33,7 @@ const Profile = ({ chat }) => {
 
       <div className="space-y-2.5">
         {detailSections.map((item) => (
-          <article key={item.label} className="rounded-xl border border-white/8 bg-white/[0.04] px-3 py-2.5">
+          <article key={item.label} className="rounded-xl border border-white/8 bg-white/4 px-3 py-2.5">
             <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-slate-400">
               {item.label}
             </p>
@@ -42,7 +42,7 @@ const Profile = ({ chat }) => {
         ))}
       </div>
 
-      <div className="rounded-xl border border-white/8 bg-white/[0.04] px-3 py-3">
+      <div className="rounded-xl border border-white/8 bg-white/4 px-3 py-3">
         <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-slate-400">
           Media & Files
         </p>

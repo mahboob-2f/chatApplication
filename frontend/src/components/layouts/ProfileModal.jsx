@@ -118,7 +118,7 @@ const ProfileModal = ({ isOpen, onClose }) => {
   }
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/50 px-3 py-4 backdrop-blur-[4px] sm:px-4 sm:py-6">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/50 px-3 py-4 backdrop-blur-xs sm:px-4 sm:py-6">
       <div
         className="mx-auto flex min-h-0 w-full max-w-3xl flex-col overflow-hidden rounded-[24px] border border-white/70 bg-white/95 p-4 shadow-[0_24px_80px_rgba(15,23,42,0.22)] sm:max-h-[min(88vh,680px)] sm:p-5"
         role="dialog"
@@ -156,7 +156,7 @@ const ProfileModal = ({ isOpen, onClose }) => {
                   className="h-16 w-16 shrink-0 rounded-full border-4 border-white object-cover shadow-lg shadow-slate-300/40 sm:h-20 sm:w-20"
                 />
               ) : (
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-300 via-sky-400 to-blue-500 text-xl font-semibold text-slate-950 shadow-lg shadow-cyan-950/15 sm:h-20 sm:w-20 sm:text-2xl">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-cyan-300 via-sky-400 to-blue-500 text-xl font-semibold text-slate-950 shadow-lg shadow-cyan-950/15 sm:h-20 sm:w-20 sm:text-2xl">
                   {initials}
                 </div>
               )}
