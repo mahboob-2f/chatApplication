@@ -6,6 +6,7 @@ import Title from '../shared/Title';
 import ChatList from './ChatList';
 import Profile from '../shared/Profile';
 import { chats } from '../../constants/chats';
+import { groups as initialGroups } from '../../constants/groups';
 
 const Header = lazy(() => import('./Header'));
 const Footer = lazy(() => import('./Footer'));
@@ -21,6 +22,7 @@ const AppLayout = () => {
   const [sidebarWidth, setSidebarWidth] = useState(320);
   const [profileWidth, setProfileWidth] = useState(300);
   const [activeResize, setActiveResize] = useState(null);
+  const [groups, setGroups] = useState(initialGroups);
 
   const routeMatch = matchPath('/chat/:chatId', location.pathname);
   const activeChatId = routeMatch?.params?.chatId ?? null;
@@ -80,7 +82,7 @@ const AppLayout = () => {
       <div className="mx-auto flex h-full w-full max-w-7xl flex-col overflow-hidden px-2 py-2 sm:px-3 sm:py-3 lg:px-4 lg:py-3.5">
 
         {/*  header component */}
-        <Header />
+        <Header onCreateGroup={setGroups} />
 
 
         <div
@@ -145,6 +147,7 @@ const AppLayout = () => {
               <Outlet
                 context={{
                   chats,
+                  groups,
                   selectedChat,
                   isProfileOpen,
                   openProfile: () => setIsProfileOpen(true),
@@ -178,7 +181,7 @@ const AppLayout = () => {
 
             {isProfileOpen && selectedChat && (
               <aside
-                className="resize-panel min-h-0 overflow-hidden rounded-[18px] border border-white/10 bg-white/5 p-3 text-slate-300 shadow-2xl shadow-black/20 sm:p-3.5 xl:w-[var(--profile-width)] xl:shrink-0 xl:rounded-[20px]"
+                className="resize-panel flex min-h-0 flex-col overflow-hidden rounded-[18px] border border-white/10 bg-white/5 p-3 text-slate-300 shadow-2xl shadow-black/20 sm:p-3.5 xl:w-[var(--profile-width)] xl:shrink-0 xl:rounded-[20px]"
               >
                 <div className="mb-2.5 flex items-center justify-between gap-3">
                   <div>
@@ -197,7 +200,9 @@ const AppLayout = () => {
                   </button>
                 </div>
 
-                <Profile chat={selectedChat} />
+                <div className="min-h-0 flex-1">
+                  <Profile chat={selectedChat} />
+                </div>
               </aside>
             )}
           </div>

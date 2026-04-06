@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   HiOutlineBars3,
   HiOutlineXMark,
@@ -8,19 +8,44 @@ import { useNavigate } from 'react-router';
 import UserSearchModal from './UserSearchModal';
 import NotificationsModal from './NotificationsModal';
 import ProfileModal from './ProfileModal';
+import { dummyNotifications } from '../../constants/notifications';
+import CreateGroupModal from './CreateGroupModal';
 
 
-const Header = () => {
+const Header = ({ onCreateGroup }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isCreateGroupOpen, setIsCreateGroupOpen] = useState(false);
+  const [notificationStates, setNotificationStates] = useState({});
   const navigate = useNavigate();
 
+  const unreadNotificationsCount = useMemo(
+    () =>
+      dummyNotifications.filter((notification) => (notificationStates[notification.id] ?? 'pending') === 'pending').length,
+    [notificationStates]
+  );
+
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  const handleNotificationAction = (notificationId, status) => {
+    setNotificationStates((prev) => ({
+      ...prev,
+      [notificationId]: status,
+    }));
+  };
+
   const handleActionClick = (actionId) => {
     if (actionId === 'search') {
       setIsSearchOpen(true);
+    }
+
+    if (actionId === 'new') {
+      setIsCreateGroupOpen(true);
+    }
+
+    if (actionId === 'groups') {
+      navigate('/groups');
     }
 
     if (actionId === 'notifications') {
@@ -32,6 +57,18 @@ const Header = () => {
     }
 
     closeMobileMenu();
+  };
+
+  const handleCreateGroup = ({ name, members }) => {
+    onCreateGroup((prev) => [
+      {
+        id: `group-${Date.now()}`,
+        name,
+        members,
+      },
+      ...prev,
+    ]);
+    navigate('/groups');
   };
 
   return (
@@ -60,8 +97,13 @@ const Header = () => {
                   aria-label={label}
                   title={label}
                   onClick={() => handleActionClick(id)}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-lg text-white backdrop-blur hover:-translate-y-0.5 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/70"
+                  className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-lg text-white backdrop-blur hover:-translate-y-0.5 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/70"
                 >
+                  {id === 'notifications' && unreadNotificationsCount > 0 ? (
+                    <span className="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full bg-slate-950 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white shadow-lg ring-2 ring-rose-400">
+                      {unreadNotificationsCount}
+                    </span>
+                  ) : null}
                   <Icon />
                 </button>
               ))}
@@ -91,8 +133,13 @@ const Header = () => {
                   key={label}
                   type="button"
                   onClick={() => handleActionClick(id)}
-                  className="flex items-center gap-2 rounded-xl border border-white/15 bg-white/10 px-3 py-2.5 text-xs font-medium text-white"
+                  className="relative flex items-center gap-2 rounded-xl border border-white/15 bg-white/10 px-3 py-2.5 text-xs font-medium text-white"
                 >
+                  {id === 'notifications' && unreadNotificationsCount > 0 ? (
+                    <span className="absolute -top-2 right-2 rounded-full bg-slate-950 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white shadow-lg ring-2 ring-rose-400">
+                      {unreadNotificationsCount}
+                    </span>
+                  ) : null}
                   <span className="text-base">
                     <Icon />
                   </span>
@@ -105,9 +152,16 @@ const Header = () => {
       </header>
 
       <UserSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <CreateGroupModal
+        isOpen={isCreateGroupOpen}
+        onClose={() => setIsCreateGroupOpen(false)}
+        onCreate={handleCreateGroup}
+      />
       <NotificationsModal
         isOpen={isNotificationsOpen}
         onClose={() => setIsNotificationsOpen(false)}
+        notificationStates={notificationStates}
+        onAction={handleNotificationAction}
       />
       <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
     </>

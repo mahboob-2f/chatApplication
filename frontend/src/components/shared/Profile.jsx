@@ -7,7 +7,8 @@ const Profile = ({ chat }) => {
   if (!chat) return null;
 
   return (
-    <section className="thin-scrollbar h-full min-h-0 space-y-3.5 overflow-y-auto pr-1">
+    <section className="thin-scrollbar h-full min-h-0 overflow-y-auto pr-1">
+      <div className="space-y-3.5 pb-1">
       <div className="rounded-[22px] border border-white/10 bg-gradient-to-br from-cyan-400/20 via-sky-500/10 to-blue-500/15 p-4 text-center shadow-xl shadow-slate-950/20">
         <ChatAvatar chat={chat} size="lg" className="mx-auto" />
         <h3 className="mt-3 text-base font-semibold text-white">{chat.name}</h3>
@@ -52,6 +53,7 @@ const Profile = ({ chat }) => {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

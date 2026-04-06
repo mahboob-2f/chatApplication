@@ -1,10 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { HiOutlineBell, HiOutlineXMark } from 'react-icons/hi2';
 import { dummyNotifications } from '../../constants/notifications';
 
-const NotificationsModal = ({ isOpen, onClose }) => {
-  const [notificationStates, setNotificationStates] = useState({});
-
+const NotificationsModal = ({ isOpen, onClose, notificationStates, onAction }) => {
   useEffect(() => {
     if (!isOpen) {
       return undefined;
@@ -28,13 +26,6 @@ const NotificationsModal = ({ isOpen, onClose }) => {
       })),
     [notificationStates]
   );
-
-  const handleAction = (notificationId, status) => {
-    setNotificationStates((prev) => ({
-      ...prev,
-      [notificationId]: status,
-    }));
-  };
 
   if (!isOpen) {
     return null;
@@ -73,60 +64,60 @@ const NotificationsModal = ({ isOpen, onClose }) => {
           <span>{visibleNotifications.filter((item) => item.status === 'pending').length} pending requests</span>
         </div>
 
-        <div className="thin-scrollbar mt-4 min-h-0 flex-1 space-y-2 overflow-y-auto pr-1">
+        <div className="thin-scrollbar mt-4 min-h-0 flex-1 space-y-1.5 overflow-y-auto pr-1">
           {visibleNotifications.length > 0 ? (
             visibleNotifications.map((notification) => (
               <div
                 key={notification.id}
-                className="rounded-[20px] border border-slate-200/80 bg-white px-3 py-3 shadow-[0_8px_24px_rgba(148,163,184,0.08)]"
+                className="rounded-[18px] border border-slate-200/80 bg-white px-3 py-2.5 shadow-[0_8px_24px_rgba(148,163,184,0.08)]"
               >
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-2.5">
                   <div
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 text-sm font-semibold ${notification.avatarClassName}`}
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-xs font-semibold ${notification.avatarClassName}`}
                     aria-hidden="true"
                   >
                     {notification.initials}
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <p className="truncate text-[15px] font-semibold leading-5 text-slate-800">
+                        <p className="truncate text-sm font-semibold leading-5 text-slate-800">
                           {notification.name}
                         </p>
-                        <p className="truncate text-sm leading-4.5 text-slate-500">
+                        <p className="truncate text-[13px] leading-4 text-slate-500">
                           {notification.username}
                         </p>
                       </div>
 
-                      <span className="shrink-0 text-[11px] font-medium text-slate-400">
+                      <span className="shrink-0 pt-0.5 text-[10px] font-medium text-slate-400">
                         {notification.time}
                       </span>
                     </div>
 
-                    <p className="mt-1.5 text-sm text-slate-600">{notification.message}</p>
+                    <p className="mt-1 text-[13px] leading-4.5 text-slate-600">{notification.message}</p>
 
                     {notification.status === 'pending' ? (
-                      <div className="mt-3 flex items-center gap-2">
+                      <div className="mt-2.5 flex items-center gap-2">
                         <button
                           type="button"
-                          onClick={() => handleAction(notification.id, 'accepted')}
-                          className="rounded-full bg-emerald-500 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-[0_10px_24px_rgba(16,185,129,0.28)] hover:bg-emerald-600"
+                          onClick={() => onAction(notification.id, 'accepted')}
+                          className="rounded-full bg-emerald-500 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white shadow-[0_10px_24px_rgba(16,185,129,0.28)] hover:bg-emerald-600"
                         >
                           Accept
                         </button>
                         <button
                           type="button"
-                          onClick={() => handleAction(notification.id, 'rejected')}
-                          className="rounded-full border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-600 hover:bg-slate-100"
+                          onClick={() => onAction(notification.id, 'rejected')}
+                          className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-600 hover:bg-slate-100"
                         >
                           Reject
                         </button>
                       </div>
                     ) : (
-                      <div className="mt-3">
+                      <div className="mt-2">
                         <span
-                          className={`inline-flex rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] ${
+                          className={`inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${
                             notification.status === 'accepted'
                               ? 'bg-emerald-50 text-emerald-600'
                               : 'bg-rose-50 text-rose-600'
