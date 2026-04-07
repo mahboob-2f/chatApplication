@@ -53,7 +53,7 @@ const Chat = () => {
 
   if (!selectedChat || selectedChat.id !== chatId) {
     return (
-      <section className="thin-scrollbar flex h-full min-h-0 items-center justify-center overflow-y-auto rounded-[22px] border border-dashed border-white/10 bg-white/[0.03] p-5 text-center">
+      <section className="thin-scrollbar flex h-full min-h-0 items-center justify-center overflow-y-auto rounded-[22px] border border-dashed border-white/10 bg-white/3 p-5 text-center">
         <div>
           <h2 className="text-lg font-semibold text-white">Conversation not found</h2>
           <p className="mt-2 text-xs text-slate-300 sm:text-sm">
@@ -127,7 +127,7 @@ const Chat = () => {
         </div>
       </header>
 
-      <div className="flex min-h-0 flex-1 flex-col rounded-[20px] border border-white/10 bg-[linear-gradient(180deg,_rgba(15,23,42,0.72),_rgba(8,47,73,0.42))] p-2.5 shadow-2xl shadow-slate-950/20 sm:p-3">
+      <div className="flex min-h-0 flex-1 flex-col rounded-[20px] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.72),rgba(8,47,73,0.42))] p-2.5 shadow-2xl shadow-slate-950/20 sm:p-3">
         <div className="thin-scrollbar min-h-0 flex-1 space-y-2.5 overflow-y-auto pr-1">
           {messages.map((message) => (
             <div
@@ -159,7 +159,7 @@ const Chat = () => {
             <textarea
               rows="2"
               placeholder="Write a message..."
-              className="thin-scrollbar min-h-[56px] max-h-24 flex-1 resize-none overflow-y-auto rounded-2xl border border-white/10 bg-slate-950/60 px-3 py-2 text-xs text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/35 sm:text-sm"
+              className="thin-scrollbar min-h-14 max-h-24 flex-1 resize-none overflow-y-auto rounded-2xl border border-white/10 bg-slate-950/60 px-3 py-2 text-xs text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/35 sm:text-sm"
             />
             <button
               type="button"
